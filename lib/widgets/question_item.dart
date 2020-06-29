@@ -19,6 +19,13 @@ class QuestionItem extends StatefulWidget {
 
 class _QuestionItemState extends State<QuestionItem> {
   int selectedAnswerIndex = -1;
+  List<Answer> shuffledAnswers;
+
+  @override
+  void initState() {
+    super.initState();
+    shuffledAnswers = widget.question.answers.toList()..shuffle();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +35,17 @@ class _QuestionItemState extends State<QuestionItem> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 8),
+          padding:
+              const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 8),
           child: SelectableText(
             '${widget.index + 1}. ${widget.question.text}',
             style: textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        ...widget.question.answers.asMap().entries.map((MapEntry<int, Answer> entry) {
+        ...shuffledAnswers
+            .asMap()
+            .entries
+            .map((MapEntry<int, Answer> entry) {
           final int index = entry.key;
           final Answer answer = entry.value;
           final bool isActive = index == selectedAnswerIndex;

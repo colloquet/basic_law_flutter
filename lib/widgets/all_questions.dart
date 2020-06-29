@@ -1,9 +1,5 @@
+import 'package:basic_law_flutter/widgets/questions_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:basic_law_flutter/store/main_model.dart';
-import 'package:basic_law_flutter/models/question.dart';
-import 'package:basic_law_flutter/widgets/question_item.dart';
 
 class AllQuestions extends StatelessWidget {
   const AllQuestions({
@@ -12,17 +8,6 @@ class AllQuestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Question> questions = context.select((MainModel value) => value.questions);
-
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          final Question question = questions[index];
-
-          return QuestionItem(index: index, question: question);
-        },
-        childCount: questions.length,
-      ),
-    );
+    return const QuestionList();
   }
 }

@@ -1,4 +1,4 @@
-# basic_law_flutter
+# Basic Law (Flutter)
 
 A new Flutter project.
 

@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:basic_law_flutter/widgets/all_questions.dart';
 import 'package:basic_law_flutter/widgets/random_questions.dart';
-import 'package:flutter/material.dart';
 
 class PracticeScreen extends StatefulWidget {
   @override

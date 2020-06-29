@@ -31,34 +31,32 @@ class HomeScreen extends StatelessWidget {
           child: const Text('基本法全文'),
         ),
       ),
-      body: Scrollbar(
-        child: ScrollablePositionedList.builder(
-          itemScrollController: _scrollController,
-          padding: const EdgeInsets.only(right: 16, bottom: 96, left: 16),
-          itemCount: basicLawText.length,
-          itemBuilder: (BuildContext context, int index) {
-            final TextNode node = basicLawText[index];
-            switch (node.type) {
-              case 'chapter-title':
-                return ChapterTitle(text: node.text);
-              case 'section-title':
-                return ChapterTitle(text: node.text);
-              case 'subtitle':
-                return Subtitle(text: node.text);
-              case 'paragraph':
-                return Paragraph(text: node.text);
-              case 'list':
-                return ListItems(node: node);
-              case 'separator':
-                return const Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Divider(height: 1),
-                );
-              default:
-                return null;
-            }
-          },
-        ),
+      body: ScrollablePositionedList.builder(
+        itemScrollController: _scrollController,
+        padding: const EdgeInsets.only(right: 16, bottom: 96, left: 16),
+        itemCount: basicLawText.length,
+        itemBuilder: (BuildContext context, int index) {
+          final TextNode node = basicLawText[index];
+          switch (node.type) {
+            case 'chapter-title':
+              return ChapterTitle(text: node.text);
+            case 'section-title':
+              return ChapterTitle(text: node.text);
+            case 'subtitle':
+              return Subtitle(text: node.text);
+            case 'paragraph':
+              return Paragraph(text: node.text);
+            case 'list':
+              return ListItems(node: node);
+            case 'separator':
+              return const Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Divider(height: 1),
+              );
+            default:
+              return null;
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.list),
