@@ -92,7 +92,6 @@ class BasicLawApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        accentColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         sliderTheme: const SliderThemeData(
           valueIndicatorTextStyle: TextStyle(fontSize: 16),
