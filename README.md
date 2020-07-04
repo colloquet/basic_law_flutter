@@ -1,6 +1,14 @@
 # Basic Law (Flutter)
 
-A new Flutter project.
+A simple flutter app about basic law.
+
+<a href="https://play.google.com/store/apps/details?id=com.colloque.basic_law_flutter" target="_blank">
+  <img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" width="150">
+</a>
+
+|                                           |                                               |
+| ----------------------------------------- | --------------------------------------------- |
+| ![Home](https://na.cx/i/ACgfy11.png 'Home') | ![Practice](https://na.cx/i/vmF4sm1.png 'Practice') |
 
 ## Getting Started
 
