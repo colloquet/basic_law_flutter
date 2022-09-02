@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ChapterTitle extends StatelessWidget {
   const ChapterTitle({
-    Key key,
-    this.text,
+    Key? key,
+    required this.text,
   }) : super(key: key);
 
   final String text;
@@ -19,7 +19,7 @@ class ChapterTitle extends StatelessWidget {
           const SizedBox(height: 16),
           SelectableText(
             text,
-            style: textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold),
+            style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),

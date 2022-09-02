@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:basic_law_flutter/models/text_node.dart';
+import '../models/text_node.dart';
 
 class ListItems extends StatelessWidget {
   const ListItems({
-    Key key,
-    this.node,
+    Key? key,
+    required this.node,
   }) : super(key: key);
 
   final TextNode node;
@@ -21,14 +21,15 @@ class ListItems extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 8),
-            ...node.children.map((TextNode _node) {
-              return Column(
-                children: <Widget>[
-                  const SizedBox(height: 8),
-                  SelectableText(_node.text, style: textTheme.bodyText2),
-                ],
-              );
-            }).toList(),
+            if (node.children != null)
+              ...node.children!.map((TextNode _node) {
+                return Column(
+                  children: <Widget>[
+                    const SizedBox(height: 8),
+                    SelectableText(_node.text, style: textTheme.bodyText2),
+                  ],
+                );
+              }).toList(),
           ],
         ),
       ),

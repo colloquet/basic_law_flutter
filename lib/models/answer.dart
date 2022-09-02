@@ -1,7 +1,7 @@
 class Answer {
   Answer({
-    this.text,
-    this.correct,
+    required this.text,
+    required this.correct,
   });
 
   factory Answer.fromJson(Map<String, dynamic> json) {

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'package:basic_law_flutter/store/main_model.dart';
-import 'package:basic_law_flutter/models/text_node.dart';
-import 'package:basic_law_flutter/screens/navigation_screen.dart';
-import 'package:basic_law_flutter/widgets/chapter_title.dart';
-import 'package:basic_law_flutter/widgets/subtitle.dart';
-import 'package:basic_law_flutter/widgets/paragraph.dart';
-import 'package:basic_law_flutter/widgets/list_items.dart';
+import '../models/text_node.dart';
+import '../store/main_model.dart';
+import '../widgets/chapter_title.dart';
+import '../widgets/list_items.dart';
+import '../widgets/paragraph.dart';
+import '../widgets/subtitle.dart';
+import 'navigation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final ItemScrollController _scrollController = ItemScrollController();
@@ -54,14 +54,14 @@ class HomeScreen extends StatelessWidget {
                 child: Divider(height: 1),
               );
             default:
-              return null;
+              return const SizedBox();
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.list),
+        child: const Icon(Icons.list),
         onPressed: () async {
-          final int id = await Navigator.push(
+          final int? id = await Navigator.push(
             context,
             MaterialPageRoute<int>(
               builder: (BuildContext context) {

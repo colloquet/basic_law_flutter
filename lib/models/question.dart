@@ -1,9 +1,9 @@
-import 'package:basic_law_flutter/models/answer.dart';
+import 'answer.dart';
 
 class Question {
   Question({
-    this.text,
-    this.answers,
+    required this.text,
+    required this.answers,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {

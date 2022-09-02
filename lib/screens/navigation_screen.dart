@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:basic_law_flutter/store/main_model.dart';
-import 'package:basic_law_flutter/models/text_node.dart';
+import '../models/text_node.dart';
+import '../store/main_model.dart';
 
 class NavigationScreen extends StatelessWidget {
   @override
@@ -37,7 +37,7 @@ class NavigationScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Text(
                     node.text,
-                    style: textTheme.subtitle1
+                    style: textTheme.subtitle1!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -51,7 +51,7 @@ class NavigationScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       top: 8, right: 8, bottom: 8, left: 32),
                   child: Text(node.text,
-                      style: textTheme.subtitle2
+                      style: textTheme.subtitle2!
                           .copyWith(fontWeight: FontWeight.normal)),
                 ),
               );

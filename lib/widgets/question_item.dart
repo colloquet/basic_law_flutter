@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
-import 'package:basic_law_flutter/models/question.dart';
-import 'package:basic_law_flutter/models/answer.dart';
+import '../models/answer.dart';
+import '../models/question.dart';
 
 class QuestionItem extends StatefulWidget {
   const QuestionItem({
-    Key key,
-    this.index,
-    this.question,
+    Key? key,
+    required this.index,
+    required this.question,
+    required this.answers,
   }) : super(key: key);
 
   final int index;
   final Question question;
+  final List<Answer> answers;
 
   @override
   _QuestionItemState createState() => _QuestionItemState();
 }
 
-class _QuestionItemState extends State<QuestionItem> {
+class _QuestionItemState extends State<QuestionItem>
+    with AutomaticKeepAliveClientMixin {
   int selectedAnswerIndex = -1;
-  List<Answer> shuffledAnswers;
 
   @override
-  void initState() {
-    super.initState();
-    shuffledAnswers = widget.question.answers.toList()..shuffle();
-  }
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Column(
@@ -39,16 +39,15 @@ class _QuestionItemState extends State<QuestionItem> {
               const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 8),
           child: SelectableText(
             '${widget.index + 1}. ${widget.question.text}',
-            style: textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold),
+            style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        ...shuffledAnswers
-            .asMap()
-            .entries
-            .map((MapEntry<int, Answer> entry) {
+        ...widget.answers.asMap().entries.map((MapEntry<int, Answer> entry) {
           final int index = entry.key;
           final Answer answer = entry.value;
           final bool isActive = index == selectedAnswerIndex;
+          final Color highlightColor =
+              answer.correct ? Colors.green.shade400 : Colors.red;
 
           return GestureDetector(
             onTap: () {
@@ -57,30 +56,40 @@ class _QuestionItemState extends State<QuestionItem> {
               });
             },
             child: Material(
+              color: Colors.transparent,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Radio(
+                    Radio<int>(
                       value: index,
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      activeColor: answer.correct ? Colors.green : Colors.red,
+                      activeColor: highlightColor,
                       groupValue: selectedAnswerIndex,
-                      onChanged: (int value) {
-                        setState(() {
-                          selectedAnswerIndex = value;
-                        });
+                      onChanged: (int? value) {
+                        if (value != null) {
+                          setState(() {
+                            selectedAnswerIndex = value;
+                          });
+                        }
                       },
                     ),
                     Flexible(
-                      child: Text(
-                        answer.text,
-                        softWrap: true,
-                        style: textTheme.bodyText2.copyWith(
-                            color: isActive
-                                ? answer.correct ? Colors.green : Colors.red
-                                : null),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            answer.text,
+                            softWrap: true,
+                            style: textTheme.bodyText2!.copyWith(
+                                color: isActive ? highlightColor : null),
+                          ),
+                          if (isActive)
+                            Icon(
+                              answer.correct ? Icons.check : Icons.close,
+                              color: highlightColor,
+                            ),
+                        ],
                       ),
                     ),
                   ],

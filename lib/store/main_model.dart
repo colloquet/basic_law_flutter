@@ -1,10 +1,10 @@
-import 'package:basic_law_flutter/models/text_node.dart';
-import 'package:basic_law_flutter/models/question.dart';
+import '../models/question.dart';
+import '../models/text_node.dart';
 
 class MainModel {
   MainModel({
-    this.basicLawText,
-    this.questions,
+    required this.basicLawText,
+    required this.questions,
   });
 
   List<TextNode> basicLawText;

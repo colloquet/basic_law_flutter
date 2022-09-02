@@ -1,8 +1,8 @@
 class TextNode {
   TextNode({
-    this.id,
-    this.type,
-    this.text,
+    required this.id,
+    required this.type,
+    required this.text,
     this.children,
   });
 
@@ -10,7 +10,7 @@ class TextNode {
     return TextNode(
         id: json['id'],
         type: json['type'],
-        text: json['text'],
+        text: json['text'] ?? '',
         children: json['type'] == 'list'
             ? json['children']
                 .map<TextNode>((dynamic child) => TextNode.fromJson(child))
@@ -21,5 +21,5 @@ class TextNode {
   int id;
   String type;
   String text;
-  List<TextNode> children;
+  List<TextNode>? children;
 }

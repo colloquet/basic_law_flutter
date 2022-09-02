@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:basic_law_flutter/screens/home_screen.dart';
-import 'package:basic_law_flutter/screens/practice_screen.dart';
-import 'package:basic_law_flutter/screens/settings_screen.dart';
+import 'home_screen.dart';
+import 'practice_screen.dart';
+import 'settings_screen.dart';
 
 class Destination {
   const Destination(this.index, this.name, this.icon, this.widget);
@@ -18,8 +18,8 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> with TickerProviderStateMixin {
-  List<Key> _destinationKeys;
-  List<AnimationController> _faders;
+  late List<Key> _destinationKeys;
+  late List<AnimationController> _faders;
 
   int _currentIndex = 0;
 
@@ -82,7 +82,7 @@ class _AppScreenState extends State<AppScreen> with TickerProviderStateMixin {
         items: allDestinations.map((Destination destination) {
           return BottomNavigationBarItem(
             icon: Icon(destination.icon),
-            title: Text(destination.name),
+            label: destination.name,
           );
         }).toList(),
       ),

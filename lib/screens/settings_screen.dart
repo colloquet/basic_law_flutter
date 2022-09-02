@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:basic_law_flutter/store/settings_model.dart';
+import '../store/settings_model.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -34,11 +34,18 @@ class SettingsScreen extends StatelessWidget {
 
     // ignore: avoid_void_async
     void _launchAbout() async {
-      const String url = 'https://basiclaw.hk/about';
-      if (await canLaunch(url)) {
-        await launch(url);
+      final Uri uri = Uri(
+        scheme: 'https',
+        path: 'basiclaw.hk/about',
+      );
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
       } else {
-        throw 'Could not launch $url';
+        const SnackBar snackBar = SnackBar(
+          content: Text('此裝置不支持打開連結'),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
 
@@ -55,15 +62,15 @@ class SettingsScreen extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     '顯示',
-                    style: textTheme.subtitle2
-                        .copyWith(color: Theme.of(context).accentColor),
+                    style: textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ],
               ),
             ),
             ListTile(
               onTap: () async {
-                final String _themeMode = await showDialog<String>(
+                final String? _themeMode = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return SimpleDialog(
@@ -81,16 +88,16 @@ class SettingsScreen extends StatelessWidget {
                                   color: Colors.transparent,
                                   child: Row(
                                     children: <Widget>[
-                                      Radio(
+                                      Radio<String>(
                                         value: mode,
                                         groupValue: themeMode,
                                         materialTapTargetSize:
                                             MaterialTapTargetSize.shrinkWrap,
-                                        onChanged: (String value) {
+                                        onChanged: (String? value) {
                                           Navigator.pop(context, value);
                                         },
                                       ),
-                                      Text(themeModeNameMap[mode]),
+                                      Text(themeModeNameMap[mode]!),
                                     ],
                                   ),
                                 ),
@@ -106,16 +113,18 @@ class SettingsScreen extends StatelessWidget {
                 }
               },
               title: const Text('外觀設定'),
-              subtitle: Text(themeModeNameMap[themeMode]),
+              subtitle: Text(themeModeNameMap[themeMode]!),
               leading: CircleAvatar(
-                backgroundColor: Theme.of(context).accentColor.withOpacity(0.3),
-                foregroundColor: Theme.of(context).accentColor.withOpacity(0.7),
-                child: Icon(Icons.brightness_4),
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                foregroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                child: const Icon(Icons.brightness_4),
               ),
             ),
             ListTile(
               onTap: () async {
-                final double _fontScale = await showDialog<double>(
+                final double? _fontScale = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return SimpleDialog(
@@ -133,12 +142,12 @@ class SettingsScreen extends StatelessWidget {
                                   color: Colors.transparent,
                                   child: Row(
                                     children: <Widget>[
-                                      Radio(
+                                      Radio<double>(
                                         value: scale,
                                         groupValue: fontScale,
                                         materialTapTargetSize:
                                             MaterialTapTargetSize.shrinkWrap,
-                                        onChanged: (double value) {
+                                        onChanged: (double? value) {
                                           Navigator.pop(context, value);
                                         },
                                       ),
@@ -160,9 +169,11 @@ class SettingsScreen extends StatelessWidget {
               title: const Text('字型大小'),
               subtitle: Text(_getFontScaleLabel(fontScale)),
               leading: CircleAvatar(
-                backgroundColor: Theme.of(context).accentColor.withOpacity(0.3),
-                foregroundColor: Theme.of(context).accentColor.withOpacity(0.7),
-                child: Icon(Icons.format_size),
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                foregroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                child: const Icon(Icons.format_size),
               ),
             ),
             Padding(
@@ -171,8 +182,8 @@ class SettingsScreen extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     '其他',
-                    style: textTheme.subtitle2
-                        .copyWith(color: Theme.of(context).accentColor),
+                    style: textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ],
               ),
@@ -182,9 +193,11 @@ class SettingsScreen extends StatelessWidget {
               title: const Text('關於此程式'),
               subtitle: const Text('香港基本法'),
               leading: CircleAvatar(
-                backgroundColor: Theme.of(context).accentColor.withOpacity(0.3),
-                foregroundColor: Theme.of(context).accentColor.withOpacity(0.7),
-                child: Icon(Icons.info_outline),
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                foregroundColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+                child: const Icon(Icons.info_outline),
               ),
             ),
           ],

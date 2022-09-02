@@ -1,9 +1,10 @@
-import 'package:basic_law_flutter/widgets/questions_list.dart';
 import 'package:flutter/material.dart';
+
+import 'questions_list.dart';
 
 class RandomQuestions extends StatelessWidget {
   const RandomQuestions({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

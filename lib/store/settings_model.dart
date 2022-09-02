@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel with ChangeNotifier {
   SettingsModel({
-    this.defaultThemeMode,
-    this.defaultFontScale,
+    required this.defaultThemeMode,
+    required this.defaultFontScale,
   }) {
     setup();
   }
@@ -20,7 +20,7 @@ class SettingsModel with ChangeNotifier {
 
   String _themeMode = 'system';
   String get themeMode => _themeMode;
-    
+
   // ignore: avoid_void_async
   void updateThemeMode(String value) async {
     _themeMode = value;
@@ -31,7 +31,7 @@ class SettingsModel with ChangeNotifier {
 
   double _fontScale = 1;
   double get fontScale => _fontScale;
-  
+
   // ignore: avoid_void_async
   void updateFontScale(double value) async {
     _fontScale = value;

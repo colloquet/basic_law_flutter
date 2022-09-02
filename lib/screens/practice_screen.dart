@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:basic_law_flutter/widgets/all_questions.dart';
-import 'package:basic_law_flutter/widgets/random_questions.dart';
+import '../widgets/all_questions.dart';
+import '../widgets/random_questions.dart';
 
 class PracticeScreen extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class PracticeScreen extends StatefulWidget {
 
 class _PracticeScreenState extends State<PracticeScreen>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  late TabController tabController;
   final ScrollController scrollController = ScrollController();
 
   int tabIndex = 0;
